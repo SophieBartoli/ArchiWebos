@@ -186,3 +186,9 @@ footer nav ul {
 	margin: 2em
 }
 
+#loginButton {
+	display: flex !important;
+	border: 2px solid green !important;
+	justify-content: center !important;
+}
+
