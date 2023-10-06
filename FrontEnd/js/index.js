@@ -204,7 +204,7 @@ fetch ('http://localhost:5678/api/works')
                         buttonTous.style.border = "1px solid #1D6154";
                         buttonTous.style.borderRadius = "20px";
                         buttonTous.style.padding = '10px 20px';
-                        buttonTous.style.cursor = 'default';
+                        buttonTous.style.cursor = 'pointer';
 
 
                         buttonObjets.style.display = 'block';
@@ -214,7 +214,7 @@ fetch ('http://localhost:5678/api/works')
                         buttonObjets.style.border = "1px solid #1D6154";
                         buttonObjets.style.borderRadius = "20px";
                         buttonObjets.style.padding = '10px 20px';
-                        buttonObjets.style.cursor = 'default';
+                        buttonObjets.style.cursor = 'pointer';
 
 
                         buttonApp.style.display = 'block';
@@ -224,7 +224,7 @@ fetch ('http://localhost:5678/api/works')
                         buttonApp.style.border = "1px solid #1D6154";
                         buttonApp.style.borderRadius = "20px";
                         buttonApp.style.padding = '10px 20px';
-                        buttonApp.style.cursor = 'default';
+                        buttonApp.style.cursor = 'pointer';
 
 
                         buttonHot.style.display = 'block';
@@ -234,21 +234,16 @@ fetch ('http://localhost:5678/api/works')
                         buttonHot.style.border = "1px solid #1D6154";
                         buttonHot.style.borderRadius = "20px";
                         buttonHot.style.padding = '10px 20px';
-                        buttonHot.style.cursor = 'default';
-
-
-
-
-
-                        
-
-
-                        
-                        
+                        buttonHot.style.cursor = 'pointer';
+   
 
                     })
 
                 })
         })
+
+
+
     }) 
-                
+
+
