@@ -235,14 +235,20 @@ fetch ('http://localhost:5678/api/works')
                         buttonHot.style.borderRadius = "20px";
                         buttonHot.style.padding = '10px 20px';
                         buttonHot.style.cursor = 'pointer';
-   
+                        
+
+                        let loginButton = document.getElementById("loginButton");
+
+                        if (sessionStorage.token == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5NjUxMjI3NywiZXhwIjoxNjk2NTk4Njc3fQ.t30pQ39-PANtdVzy9ki9EFX_GgAA4EFFJyuTamk_oWI" && sessionStorage.userId == 1) {
+                            loginButton.style.display = 'none';
+                        } else {
+                            loginButton.style.display = 'block';
+                        }
 
                     })
 
                 })
         })
-
-
 
     }) 
 
