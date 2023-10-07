@@ -9,6 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="https://kit.fontawesome.com/571a575364.js" crossorigin="anonymous"></script>
 </head>
 
 
@@ -27,6 +28,8 @@
 			<li>
 				<a href="./login.html" class="linkButtons" id="loginButton">login</a>
 			</li>
+			<li>
+				<a href="#" class="linkButtons" id="logoutButton" onclick="logOutOfSession()">logout</a>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -46,8 +49,10 @@
 	</section>
 
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-
+		<div id="projetsDiv">
+			<h2 id="projetsHeader">Mes Projets</h2>
+			<a href="#" id="modifierButton"><i id="modifierLogo" class="fa-regular fa-pen-to-square"></i>modifier</a>
+		</div>
 		<div id="categoriesHtml">
 			<ul id="ulCategories">
 				

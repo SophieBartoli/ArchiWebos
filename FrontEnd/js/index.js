@@ -238,11 +238,26 @@ fetch ('http://localhost:5678/api/works')
                         
 
                         let loginButton = document.getElementById("loginButton");
+                        let logoutButton = document.getElementById("logoutButton");
+                        let ulCategories = document.getElementById("ulCategories");
+                        let projetsDiv = document.getElementById("projetsDiv");
+                        
 
                         if (sessionStorage.token == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5NjUxMjI3NywiZXhwIjoxNjk2NTk4Njc3fQ.t30pQ39-PANtdVzy9ki9EFX_GgAA4EFFJyuTamk_oWI" && sessionStorage.userId == 1) {
                             loginButton.style.display = 'none';
+                            logoutButton.style.display = 'block';
+                            ulCategories.style.display = 'none';
+                            projetsDiv.style.margin = '0px 0px 50px';
                         } else {
                             loginButton.style.display = 'block';
+                            logoutButton.style.display = 'none';
+                            ulCategories.style.display = 'flex';
+                            
+                        }
+
+                        function logOutOfSession() {
+                            sessionStorage.clear();
+                            window.location.reload();
                         }
 
                     })
