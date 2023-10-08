@@ -305,13 +305,68 @@ footer nav ul {
 	display: none;
 	justify-content: center;
 	align-items: center;
-
 }
 
 #modal{
 	display: flex;
 	background: white;
 	flex-direction: column;
-
+	width: 40%;
+	border-radius: 5px;
+	text-align: center;
 }
+
+#closeDiv {
+	text-align: right;
+	margin: 10px 10px 5px 10px;
+}
+
+#modalClose {
+	border: none;
+	background: white;
+	height: 10px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#modal h3 {
+	font-size: 1.5em;
+	margin: 10px 0px 20px 0px;
+}
+
+#modalWorks {
+	display: flex;
+	flex-wrap: wrap;
+	height: auto;
+	width: 61.5%;
+}
+
+#modalWorks img {
+	height: auto;
+	width: 60px;
+	margin: 10px 3px 6px 3px;
+}
+
+#photoSubmitDiv {
+	border-top: 2px solid #D3D3D3;
+	margin: 40px 102px 0px 102px;
+	align-items: center;
+}
+
+#photoSubmit {
+	margin: 40px 0px 40px 0px;
+	padding: 5px 35px 5px 35px;
+	background: #1D6154;
+	color: white;
+	border: none;
+	border-radius: 40px;
+	cursor: pointer;
+}
+
+#modalWorksDiv {
+	display: flex;
+	justify-content: center;
+	
+}
+
 

@@ -239,6 +239,7 @@ fetch ('http://localhost:5678/api/works')
                         buttonHot.style.padding = '10px 20px';
                         buttonHot.style.cursor = 'pointer';
                         
+                        // removing login button and putting logout button when logged in
 
                         let loginButton = document.getElementById("loginButton");
                         let logoutButton = document.getElementById("logoutButton");
@@ -255,6 +256,8 @@ fetch ('http://localhost:5678/api/works')
                             loginButton.style.display = 'block';
                             logoutButton.style.display = 'none';
                             ulCategories.style.display = 'flex';
+                            modifierButton.style.display = 'none';
+
                             
                         }
 
@@ -266,22 +269,49 @@ fetch ('http://localhost:5678/api/works')
 
     }) 
 
-    let logoutButton = document.getElementById('logoutButton');
-    let modifierButton = document.getElementById('modifierButton');
-    let boiteModal = document.getElementById('boiteModal');
-    let modalClose = document.getElementById('modalClose');
+//doing the action of logging out
 
-    logoutButton.addEventListener("click", function (event) {
-        sessionStorage.clear();
-        window.location.reload();
+let logoutButton = document.getElementById('logoutButton');
+let modifierButton = document.getElementById('modifierButton');
+let boiteModal = document.getElementById('boiteModal');
+let modalClose = document.getElementById('modalClose');
+
+logoutButton.addEventListener("click", function (event) {
+    sessionStorage.clear();
+    window.location.reload();
+    
+})
+
+//doing the action of modifying the gallery
+modifierButton.addEventListener("click", function (event) {
+    boiteModal.style.display = "flex";
+})
+
+modalClose.addEventListener('click', function (event) {
+    boiteModal.style.display = "none";
+})
+
+
+//fetch de la fenêtre modale
+let modalWorks = document.getElementById('modalWorks');
+
+fetch ('http://localhost:5678/api/works')
+.then((datas) => {
+    datas.json()
+    .then((works) => {
+
+        for (let i = 0; i < works.length; i++) {
+
+            let modalImages = document.createElement('img');
+
+            modalWorks.appendChild(modalImages);
+
+                let work = works[i];
+                let workValues = Object.values(work);
+                let workUrl = workValues[2];
+                modalImages.src = workUrl;
+        }
         
-    })
 
-    modifierButton.addEventListener("click", function (event) {
-        boiteModal.style.display = "flex";
     })
-
-    modalClose.addEventListener('click', function (event) {
-        boiteModal.style.display = "none";
-    })
-
+})
