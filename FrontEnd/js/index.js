@@ -269,12 +269,19 @@ fetch ('http://localhost:5678/api/works')
     let logoutButton = document.getElementById('logoutButton');
     let modifierButton = document.getElementById('modifierButton');
     let boiteModal = document.getElementById('boiteModal');
+    let modalClose = document.getElementById('modalClose');
 
     logoutButton.addEventListener("click", function (event) {
-            sessionStorage.clear();
-            window.location.reload();
+        sessionStorage.clear();
+        window.location.reload();
         
     })
 
-   
+    modifierButton.addEventListener("click", function (event) {
+        boiteModal.style.display = "flex";
+    })
+
+    modalClose.addEventListener('click', function (event) {
+        boiteModal.style.display = "none";
+    })
 
