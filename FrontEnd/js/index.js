@@ -2,6 +2,8 @@ const imagesArray = [];
 const catArray = [];
 const catIdArray = [];
 
+
+
 fetch ('http://localhost:5678/api/works')
     .then((datas) => {
         datas.json()
@@ -29,6 +31,7 @@ fetch ('http://localhost:5678/api/works')
                 // putting figure in div and the images in figure
                 container.appendChild(figureElement);
                 figureElement.appendChild(imageElement);
+
 
                 // getting url of images and putting it on image
                 let element = elements[i];
@@ -255,10 +258,6 @@ fetch ('http://localhost:5678/api/works')
                             
                         }
 
-                        function logOutOfSession() {
-                            sessionStorage.clear();
-                            window.location.reload();
-                        }
 
                     })
 
@@ -267,4 +266,15 @@ fetch ('http://localhost:5678/api/works')
 
     }) 
 
+    let logoutButton = document.getElementById('logoutButton');
+    let modifierButton = document.getElementById('modifierButton');
+    let boiteModal = document.getElementById('boiteModal');
+
+    logoutButton.addEventListener("click", function (event) {
+            sessionStorage.clear();
+            window.location.reload();
+        
+    })
+
+   
 
