@@ -377,10 +377,80 @@ footer nav ul {
 }
 
 #closeTest {
-	border: 2px solid red;
 	background: transparent;
 	width: 100%;
 	height: 100%;
 	position: fixed;
 	z-index: 2;
+}
+
+/* CSS fenetre ajout photo */
+#modalPhoto {
+	display: flex;
+	background: white;
+	flex-direction: column;
+	width: 40%;
+	border-radius: 5px;
+	text-align: center;
+	z-index: 4;
+	position: absolute;
+	display: none;
+}
+
+#closeDivPhoto {
+	text-align: right;
+	margin: 10px 10px 5px 10px;
+}
+
+#modalWorksReturn {
+	margin: 0px 500px 0px 0px;
+	border: none;
+	background: white;
+	height: 10px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#modalClosePhoto {
+	border: none;
+	background: white;
+	height: 10px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+
+#modalPhoto h3 {
+	font-size: 1.5em;
+	margin: 10px 0px 20px 0px;
+}
+
+#worksAjoutPhoto {
+	display: flex;
+	flex-wrap: wrap;
+	height: auto;
+	width: 61.5%;
+}
+
+
+
+#ajoutPhotoDiv {
+	border-top: 2px solid #D3D3D3;
+	margin: 40px 102px 0px 102px;
+	align-items: center;
+}
+
+#ajoutPhoto {
+	margin: 40px 0px 40px 0px;
+	padding: 5px 35px 5px 35px;
+	background: #1D6154;
+	color: white;
+	border: none;
+	border-radius: 40px;
+	cursor: pointer;
+}
+
+#worksAjoutPhotoDiv {
+	display: flex;
+	justify-content: center;
 }

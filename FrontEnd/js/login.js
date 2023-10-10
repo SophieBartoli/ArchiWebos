@@ -16,7 +16,7 @@ function ajoutListenerLogin() {
     
         const chargeUtile = JSON.stringify(login);
     
-        //fetch pour obtenir les identifiants
+        //fetch pour ajouter les identifiants
         fetch("http://localhost:5678/api/users/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },

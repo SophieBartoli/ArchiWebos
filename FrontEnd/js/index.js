@@ -320,4 +320,26 @@ fetch ('http://localhost:5678/api/works')
     })
 })
 
-//fetch pour supprimer des projets
+//fetch pour ajouter des projets
+
+
+let modalClosePhoto = document.getElementById('modalClosePhoto');
+let photoSubmit = document.getElementById('photoSubmit');
+let modal = document.getElementById('modal');
+let modalPhoto = document.getElementById('modalPhoto');
+let modalWorksReturn = document.getElementById('modalWorksReturn');
+
+modalClosePhoto.addEventListener('click', function (event) {
+    boiteModal.style.display = 'none';
+})
+
+photoSubmit.addEventListener('click', function (event) {
+    modal.style.display = 'none';
+    modalPhoto.style.display = 'flex';
+})
+
+modalWorksReturn.addEventListener('click', function (event) {
+    modal.style.display = 'flex';
+    modalPhoto.style.display = 'none';
+})
+
