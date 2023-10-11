@@ -185,7 +185,7 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-/* Fin du CSS du projet original */
+/****** Fin du CSS du projet original ******/
 
 
 /* CSS bouton login */
@@ -200,7 +200,7 @@ footer nav ul {
 	margin: 50px 0px 50px 0px;
 }
 
-/* CSS page login */
+/****** CSS page login ******/
 .inputTitle {
 	width: 175px;
 }
@@ -278,7 +278,7 @@ footer nav ul {
 
 }
 
-/* CSS page accueil apres login */
+/***** CSS page accueil apres login *****/
 #projetsDiv {
 	display: flex;
 	flex-direction: row;
@@ -299,7 +299,7 @@ footer nav ul {
 	color: black;
 }
 
-/* CSS fenetre modale */
+/***** CSS fenetre modale *****/
 #boiteModal {
 	position: fixed;
 	z-index: 1;
@@ -376,7 +376,7 @@ footer nav ul {
 	
 }
 
-#closeTest {
+#closeOut {
 	background: transparent;
 	width: 100%;
 	height: 100%;
@@ -384,12 +384,13 @@ footer nav ul {
 	z-index: 2;
 }
 
-/* CSS fenetre ajout photo */
+/**** CSS fenetre ajout photo *****/
 #modalPhoto {
 	display: flex;
 	background: white;
 	flex-direction: column;
 	width: 40%;
+	height: 518px;
 	border-radius: 5px;
 	text-align: center;
 	z-index: 4;
@@ -425,24 +426,93 @@ footer nav ul {
 	margin: 10px 0px 20px 0px;
 }
 
+#worksAjoutPhotoDiv {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 #worksAjoutPhoto {
 	display: flex;
-	flex-wrap: wrap;
-	height: auto;
+	flex-direction: column;
+	align-items: center;
+	height: 130px;
 	width: 61.5%;
+	margin: 0px 0px 20px 0px;
+	background: #e9f5f8;
+	justify-content: space-around;
+}
+
+#logoAjoutPhoto {
+	font-size: 4em;
+	color: #b9d2da;
+	margin: 5px 0px 0px 0px;
+}
+
+#lienAjoutPhoto {
+	width: 50%;
+	padding: 10px 0px 10px 0px;
+	background: #b9d2da;
+	color: #0d5483;
+	border: none;
+	border-radius: 40px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+#lienFile {
+	display: none;
+}
+
+#maxMoAjoutPhoto {
+	font-size: 0.8em;
+	margin: 0px 0px 5px 0px;
 }
 
 
 
+/* Nom et categorie de l'image */
+#titreInput {
+	margin: 10px 0px 15px 0px;
+}
+
+#categorieSelect {
+	margin: 10px 0px 0px 0px;
+}
+
+#ajoutPhotoInputDiv {
+	display: flex;
+	flex-direction: column;
+	width: 61.5%;
+	align-items: flex-start;
+}
+
+#titreInput {
+	width: 99%;
+	border: 0;
+	box-shadow: 0px 0px 10px #D3D3D3; 
+	height: 40px;
+}
+
+#categorieSelect {
+	width: 100%;
+	border: 0;
+	box-shadow: 0px 0px 10px #D3D3D3; 
+	height: 40px;
+}
+
+
+
+/* bouton submit */
 #ajoutPhotoDiv {
 	border-top: 2px solid #D3D3D3;
-	margin: 40px 102px 0px 102px;
+	margin: 30px 102px 0px 102px;
 	align-items: center;
 }
 
 #ajoutPhoto {
-	margin: 40px 0px 40px 0px;
-	padding: 5px 35px 5px 35px;
+	margin: 30px 0px 40px 0px;
+	padding: 5px 70px 5px 70px;
 	background: #1D6154;
 	color: white;
 	border: none;

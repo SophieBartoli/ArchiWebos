@@ -269,12 +269,7 @@ fetch ('http://localhost:5678/api/works')
     }) 
 
 //action du bouton logout
-
 let logoutButton = document.getElementById('logoutButton');
-let modifierButton = document.getElementById('modifierButton');
-let boiteModal = document.getElementById('boiteModal');
-let modalClose = document.getElementById('modalClose');
-let closeTest = document.getElementById('closeTest');
 
 logoutButton.addEventListener('click', function (event) {
     sessionStorage.clear();
@@ -283,16 +278,22 @@ logoutButton.addEventListener('click', function (event) {
 })
 
 //action du bouton modifier 
+let modifierButton = document.getElementById('modifierButton');
+let boiteModal = document.getElementById('boiteModal');
+
 modifierButton.addEventListener('click', function (event) {
     boiteModal.style.display = 'flex';
 })
 
 //fermeture de la fenetre modale lors du clic sur la croix ou hors de la fenetre
+let modalClose = document.getElementById('modalClose');
+let closeOut = document.getElementById('closeOut');
+
 modalClose.addEventListener('click', function (event) {
     boiteModal.style.display = 'none';
 })
 
-closeTest.addEventListener('click', function (event) {
+closeOut.addEventListener('click', function (event) {
     boiteModal.style.display = 'none';
 })
 
@@ -343,3 +344,9 @@ modalWorksReturn.addEventListener('click', function (event) {
     modalPhoto.style.display = 'none';
 })
 
+let lienAjoutPhoto = document.getElementById('lienAjoutPhoto');
+
+
+lienAjoutPhoto.addEventListener('click', function (event) {
+    document.getElementById('lienFile').click();
+})
