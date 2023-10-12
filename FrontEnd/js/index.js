@@ -297,7 +297,7 @@ closeOut.addEventListener('click', function (event) {
     boiteModal.style.display = 'none';
 })
 
-//fetch de la fenêtre modale
+//fetch de la fenetre modale
 let modalWorks = document.getElementById('modalWorks');
 
 fetch ('http://localhost:5678/api/works')
@@ -321,8 +321,7 @@ fetch ('http://localhost:5678/api/works')
     })
 })
 
-//fetch pour ajouter des projets
-
+//// fenetre d'ajout des projets ////
 
 let modalClosePhoto = document.getElementById('modalClosePhoto');
 let photoSubmit = document.getElementById('photoSubmit');
@@ -339,14 +338,65 @@ photoSubmit.addEventListener('click', function (event) {
     modalPhoto.style.display = 'flex';
 })
 
+//retour sur premiere fenetre et reset de l'image
 modalWorksReturn.addEventListener('click', function (event) {
     modal.style.display = 'flex';
     modalPhoto.style.display = 'none';
+    logoAjoutPhoto.style.display = 'block';
+    maxMoAjoutPhoto.style.display = 'block';
+    lienAjoutPhoto.style.display = 'block';
+    logoAjoutPhoto.style.display = 'none';
+    maxMoAjoutPhoto.style.display = 'none';
+    lienAjoutPhoto.style.display = 'none';
 })
 
+//lier le bouton cree au bouton input file cache
 let lienAjoutPhoto = document.getElementById('lienAjoutPhoto');
-
+let lienFile = document.getElementById('lienFile');
+let logoAjoutPhoto = document.getElementById('logoAjoutPhoto');
+let maxMoAjoutPhoto = document.getElementById('maxMoAjoutPhoto');
 
 lienAjoutPhoto.addEventListener('click', function (event) {
     document.getElementById('lienFile').click();
 })
+
+//charger la photo choisie
+let imageProjet = document.getElementById('imageProjet');
+let imageProjetUrl = '';
+
+lienFile.onchange = function() {
+    imageProjet.src = URL.createObjectURL(lienFile.files[0]);
+    imageProjetUrl = imageProjet.src;
+    logoAjoutPhoto.style.display = 'none';
+    maxMoAjoutPhoto.style.display = 'none';
+    lienAjoutPhoto.style.display = 'none';
+
+    if (lienFile.files[0].size > 4194304) {
+        alert("Ficher trop lourd !");
+        imageProjet.style.display = 'none';
+        window.location.reload();
+    }
+}
+
+//pouvoir changer l'image lors du clic sur image
+imageProjet.addEventListener('click', function (event) {
+    lienFile.click();
+})
+
+//actions du bouton submit de la nouvelle photo
+let titreInput = document.getElementById('titreInput');
+let categorieSelect = document.getElementById('categorieSelect');
+let ajoutPhoto = document.getElementById('ajoutPhoto');
+
+if (titreInput !== '' && categorieSelect !== '') {
+    ajoutPhoto.addEventListener('click', function (event) {
+        window.location.reload();
+    })
+} else {
+    ajoutPhoto.addEventListener('click', function (event) {
+        alert("Champs obligatoires");
+    })
+}
+
+
+
