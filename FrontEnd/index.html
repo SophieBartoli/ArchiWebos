@@ -70,7 +70,7 @@
 				</div>
 			</div>
 
-			<div id="modalPhoto">
+			<form id="modalPhoto" method="post">
 				<div id="closeDivPhoto">
 					<button id="modalWorksReturn"><i class="fa-solid fa-arrow-left"></i></button>
 					<button id="modalClosePhoto"><i class="fa-solid fa-xmark"></i></button>
@@ -81,26 +81,25 @@
 						<img id="imageProjet">
 						<i id="logoAjoutPhoto" class="fa-regular fa-image"></i>
 						<a id="lienAjoutPhoto">+ Ajouter photo</a>
-						<input type="file" id="lienFile" accept="image/png, image/jpg">
+						<input type="file" id="lienFile" accept="image/png, image/jpg" name="lienFile">
 						<p id="maxMoAjoutPhoto">jpg, png : 4mo max</p>
 					</div>
 					<div id="ajoutPhotoInputDiv">
-						<label for="titreInput">Titre</label>
+						<label for="titreInput" name="titreInput">Titre</label>
 						<input type="text" id="titreInput">
 						<label for="categorieSelect">Catégorie</label>
-						<select id="categorieSelect">
-							<option value="vide"></option>
+						<select id="categorieSelect" name="categorieSelect">
+							<option value=""></option>
 							<option value="Objets">Objets</option>
 							<option value="Appartements">Appartements</option>
 							<option value="Hotels & restaurants">Hotels & restaurants</option>
 						</select>
 					</div>
-
 				</div>
 				<div id="ajoutPhotoDiv">
-					<button id="ajoutPhoto">Valider</button>
+					<input type="submit" id="ajoutPhoto" value="Valider" onclick="ajoutPhotoFun()">
 				</div>
-			</div>
+			</form>
 
 		</div>
 

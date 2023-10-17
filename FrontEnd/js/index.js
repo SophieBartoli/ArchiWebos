@@ -388,15 +388,84 @@ let titreInput = document.getElementById('titreInput');
 let categorieSelect = document.getElementById('categorieSelect');
 let ajoutPhoto = document.getElementById('ajoutPhoto');
 
-if (titreInput !== '' && categorieSelect !== '') {
-    ajoutPhoto.addEventListener('click', function (event) {
-        window.location.reload();
-    })
-} else {
-    ajoutPhoto.addEventListener('click', function (event) {
-        alert("Champs obligatoires");
-    })
+function dataURLtoBlob(dataurl) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
+}
+
+function ajoutPhotoFun() {
+    modalPhoto.addEventListener('submit', function(event) {
+        if (titreInput.value !== '' && categorieSelect.value !== '' && imageProjetUrl !== '') {
+            event.preventDefault();
+
+            let token = localStorage.getItem("token");
+            
+            if (!token) {
+                alert("Token manquant. Veuillez vous reconnecter.");
+                return;
+            }
+
+            const formData = new FormData();
+
+            var blob = dataURLtoBlob(imageProjetUrl);
+
+            formData.append('title', titreInput.value);
+            formData.append('category', categorieSelect.value);
+            formData.append('image', blob, imageProjetUrl); 
+
+
+            fetch("http://localhost:5678/api/works", {
+                method: "POST",
+                headers: {
+                    "Authorization": 'Bearer ' + token
+                },
+                body: formData,
+            })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error("Erreur lors de la connexion");
+                }
+                return res.json();
+            })
+            .then(createWork => {
+                console.log(createWork);
+                localStorage.setItem("title", createWork.title);
+                localStorage.setItem("categoryId", createWork.categoryId);
+                localStorage.setItem("imageUrl", createWork.imageUrl);
+            })
+            .catch(problem => {
+                console.error("Il y a eu un problème avec l'opération fetch:", problem);
+            });
+        } else {
+            alert("Champs obligatoires");
+        }
+    });
 }
 
 
 
+
+
+/*
+
+        event.preventDefault();
+        
+        const formData = new FormData (modalPhoto);
+        
+        const dataFromEntry = Object.fromEntries(formData);
+
+        console.log(dataFromEntry);
+
+        fetch("http://localhost:5678/api/works", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataFromEntry)
+
+        })
+        */
