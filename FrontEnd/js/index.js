@@ -388,18 +388,12 @@ let titreInput = document.getElementById('titreInput');
 let categorieSelect = document.getElementById('categorieSelect');
 let ajoutPhoto = document.getElementById('ajoutPhoto');
 
-function dataURLtoBlob(dataurl) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new Blob([u8arr], { type: mime });
-}
-
 function ajoutPhotoFun() {
+
     modalPhoto.addEventListener('submit', function(event) {
+
         if (titreInput.value !== '' && categorieSelect.value !== '' && imageProjetUrl !== '') {
+
             event.preventDefault();
 
             let token = localStorage.getItem("token");
@@ -411,12 +405,9 @@ function ajoutPhotoFun() {
 
             const formData = new FormData();
 
-            var blob = dataURLtoBlob(imageProjetUrl);
-
+            formData.append('image', lienFile.files[0]); 
             formData.append('title', titreInput.value);
             formData.append('category', categorieSelect.value);
-            formData.append('image', blob, imageProjetUrl); 
-
 
             fetch("http://localhost:5678/api/works", {
                 method: "POST",
@@ -427,7 +418,7 @@ function ajoutPhotoFun() {
             })
             .then(res => {
                 if (!res.ok) {
-                    throw new Error("Erreur lors de la connexion");
+                    return res.json().then(err => { throw err; });
                 }
                 return res.json();
             })
@@ -445,27 +436,3 @@ function ajoutPhotoFun() {
         }
     });
 }
-
-
-
-
-
-/*
-
-        event.preventDefault();
-        
-        const formData = new FormData (modalPhoto);
-        
-        const dataFromEntry = Object.fromEntries(formData);
-
-        console.log(dataFromEntry);
-
-        fetch("http://localhost:5678/api/works", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dataFromEntry)
-
-        })
-        */
