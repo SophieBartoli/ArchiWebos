@@ -1,18 +1,18 @@
 module.exports = (req, res, next) => {
 	try{
 		const host = req.get('host');
-		const title = req.body.title.trim() ?? undefined;
-		const categoryId = parseInt(req.body.category) ?? undefined;
-		const userId = req.auth.userId ?? undefined;
-		const imageUrl = `${req.protocol}://${host}/images/${req.file.filename}` ?? undefined;
-	console.log(title,categoryId,userId,imageUrl)
-		if(title !== undefined &&
+		const title = req.body.title.trim();
+		const categoryId = parseInt(req.body.category);
+		const userId = req.auth.userId;
+		const imageUrl = `${req.protocol}://${host}/images/${req.file.filename}`;
+	//console.log(title,categoryId,userId,imageUrl)
+		if(title &&
 			title.length > 0 &&
-			categoryId !== undefined &&
+			categoryId &&
 			categoryId > 0 &&
-			userId !== undefined &&
+			userId &&
 			userId > 0 &&
-			imageUrl !== undefined){
+			imageUrl){
 			req.work = {title, categoryId, userId, imageUrl}
 			next()
 		}else{

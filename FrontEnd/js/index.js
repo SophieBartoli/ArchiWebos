@@ -1,272 +1,279 @@
-const imagesArray = [];
-const catArray = [];
-const catIdArray = [];
+let imagesArray = [];
+let catArray = [];
+let catIdArray = [];
+
+
+function fetchWorksElements() {
+    fetch('http://localhost:5678/api/works')
+        .then((datas) => {
+            datas.json()
+                .then((elements) => {
+                    //clean data
+                    imagesArray = [];
+                    catArray = [];
+                    catIdArray = [];
+
+                    //console.log(elements);
+
+                    // loop pour voir les elements dans la console
+                    for (let i = 0; i < elements.length; i++) {
+                        //console.log(elements[i]);
+                    }
+
+                    // loop pour creer les images dans le js
+                    for (let i = 0; i < elements.length; i++) {
+
+                        //creation de la figure et de l'image
+                        let figureElement = document.createElement('figure');
+                        let imageElement = document.createElement('img');
+
+                        imagesArray.push(figureElement); //ajout de chaque image dans son array
+
+                        //obtenir le div
+                        const container = document.getElementById('imgGallery');
+
+                        // mettre la figure dans le div et les images dans la figure
+                        container.appendChild(figureElement);
+                        figureElement.appendChild(imageElement);
+
+
+                        // obtenir l'url des images et les mettre sur chaque image creee
+                        let element = elements[i];
+                        let values = Object.values(element);
+                        let imgUrl = values[2];
+                        imageElement.src = imgUrl;
+
+                        // obtenir le titre de chaque image et les mettre sur image
+                        let imgText = values[1];
+                        let imageCaption = document.createElement('figcaption');
+                        figureElement.appendChild(imageCaption);
+                        imageCaption.innerHTML = values[1];
+
+                        // donner le numero de categorie de chaque image
+                        let categoryId = values[3];
+
+                        catIdArray.push(categoryId); //ajouter les numeros de categories dans une array
+
+
+                    }
 
 
 
-fetch ('http://localhost:5678/api/works')
-    .then((datas) => {
-        datas.json()
-        .then((elements) => {
-
-            console.log(elements);
-
-            // loop pour voir les elements dans la console
-            for (let i = 0; i < elements.length; i++) {
-                console.log(elements[i]);
-            }
-
-            // loop pour creer les images dans le js
-            for (let i = 0; i < elements.length; i++) {
-
-                //creation de la figure et de l'image
-                let figureElement = document.createElement('figure');
-                let imageElement = document.createElement('img');
-
-                imagesArray.push(figureElement); //ajout de chaque image dans son array
-
-                //obtenir le div
-                const container = document.getElementById('imgGallery');
-
-                // mettre la figure dans le div et les images dans la figure
-                container.appendChild(figureElement);
-                figureElement.appendChild(imageElement);
 
 
-                // obtenir l'url des images et les mettre sur chaque image creee
-                let element = elements[i];
-                let values = Object.values(element);
-                let imgUrl = values[2];
-                imageElement.src = imgUrl;
+                    fetch('http://localhost:5678/api/categories')
+                        .then((datas) => {
+                            datas.json()
+                                .then((categories) => {
 
-                // obtenir le titre de chaque image et les mettre sur image
-                let imgText = values[1]; 
-                let imageCaption = document.createElement('figcaption');
-                figureElement.appendChild(imageCaption);
-                imageCaption.innerHTML = values[1];
+                                    //console.log(categories);
 
-                // donner le numero de categorie de chaque image
-                let categoryId = values[3];
+                                    // loop pour voir les categories dans la console
+                                    for (let i = 0; i < categories.length; i++) {
+                                        //console.log(categories[i]);
+                                    }
 
-                catIdArray.push(categoryId); //ajouter les numeros de categories dans une array
+                                    //obtenir le div des categories depuis HTML
+                                    const catContainer = document.getElementById('ulCategories');
 
+                                    //creation de la categorie tous
+                                    let tousCategory = document.createElement('li');
+                                    catContainer.appendChild(tousCategory);
+                                    tousCategory.innerHTML = 'Tous';
 
-            } 
-    
-        
-    
-
-
-            fetch ('http://localhost:5678/api/categories')
-                .then((datas) => { 
-                    datas.json()    
-                    .then((categories) => {
-
-                        console.log(categories);
-
-                        // loop pour voir les categories dans la console
-                        for (let i = 0; i < categories.length; i++) {
-                            console.log(categories[i]);
-                        }
-
-                        //obtenir le div des categories depuis HTML
-                        const catContainer = document.getElementById('ulCategories');
-
-                        //creation de la categorie tous
-                        let tousCategory = document.createElement('li');
-                        catContainer.appendChild(tousCategory);
-                        tousCategory.innerHTML = 'Tous';
-                        
-                        catArray.push(tousCategory); //mettre la categorie tous en index 0 dans l'array
+                                    catArray.push(tousCategory); //mettre la categorie tous en index 0 dans l'array
 
 
-                        // loop pour creer les trois autres categories dans js
-                        for (let i = 0; i < categories.length; i++) {
+                                    // loop pour creer les trois autres categories dans js
+                                    for (let i = 0; i < categories.length; i++) {
 
-                            //creation des categories
-                            let liCategories = document.createElement('li');
-                            
-                            //mettre les categories dans le div des categories
-                            catContainer.appendChild(liCategories);
+                                        //creation des categories
+                                        let liCategories = document.createElement('li');
 
-                            // obtenir les informations des categories et les mettre dans l'ul
-                            let category = categories[i];
-                            let catValues = Object.values(category);
-                            let catText = catValues[1]; 
-                            liCategories.innerHTML = catText;
+                                        //mettre les categories dans le div des categories
+                                        catContainer.appendChild(liCategories);
 
-                            catArray.push(liCategories); //mettre les autres categories sur les index 1,2,3
-                        }  
+                                        // obtenir les informations des categories et les mettre dans l'ul
+                                        let category = categories[i];
+                                        let catValues = Object.values(category);
+                                        let catText = catValues[1];
+                                        liCategories.innerHTML = catText;
 
-                        //nommer chaque index avec le nom de categories
-                        let buttonTous = catArray[0];
-                        let buttonObjets = catArray[1];
-                        let buttonApp = catArray[2];
-                        let buttonHot = catArray[3];
+                                        catArray.push(liCategories); //mettre les autres categories sur les index 1,2,3
+                                    }
 
-                        //montrer toutes les images quand on appuie sur Tous
-                         buttonTous.onclick = function () {
-                            for (let i = 0; imagesArray.length; i++) {
-                                imagesArray[i].style.display = 'block';
+                                    //nommer chaque index avec le nom de categories
+                                    let buttonTous = catArray[0];
+                                    let buttonObjets = catArray[1];
+                                    let buttonApp = catArray[2];
+                                    let buttonHot = catArray[3];
 
-                                //CSS des boutons lors du clic
-                                buttonTous.style.color = 'white';
-                                buttonTous.style.backgroundColor = '#1D6154'; 
+                                    //montrer toutes les images quand on appuie sur Tous
+                                    buttonTous.onclick = function () {
+                                        for (let i = 0; i < imagesArray.length; i++) {
+                                            imagesArray[i].style.display = 'block';
 
-                                buttonObjets.style.color = '#1D6154';
-                                buttonObjets.style.backgroundColor = 'white';
-                                buttonApp.style.color = '#1D6154';
-                                buttonApp.style.backgroundColor = 'white';
-                                buttonHot.style.color = '#1D6154';
-                                buttonHot.style.backgroundColor = 'white';
+                                            //CSS des boutons lors du clic
+                                            buttonTous.style.color = 'white';
+                                            buttonTous.style.backgroundColor = '#1D6154';
 
-                            }
+                                            buttonObjets.style.color = '#1D6154';
+                                            buttonObjets.style.backgroundColor = 'white';
+                                            buttonApp.style.color = '#1D6154';
+                                            buttonApp.style.backgroundColor = 'white';
+                                            buttonHot.style.color = '#1D6154';
+                                            buttonHot.style.backgroundColor = 'white';
 
-                        } 
+                                        }
 
-                        //montrer les images d'objets quand on appuie sur Objets
-                        buttonObjets.onclick = function () {
-                            for (let i = 0; imagesArray.length; i++) {
-                                if (catIdArray[i] === 1) {
-                                    imagesArray[i].style.display = 'block';
+                                    }
 
-                                    //CSS des boutons lors du clic
-                                    buttonObjets.style.color = 'white';
-                                    buttonObjets.style.backgroundColor = '#1D6154';
+                                    //montrer les images d'objets quand on appuie sur Objets
+                                    buttonObjets.onclick = function () {
+                                        for (let i = 0; i < imagesArray.length; i++) {
+                                            if (catIdArray[i] === 1) {
+                                                imagesArray[i].style.display = 'block';
 
+                                                //CSS des boutons lors du clic
+                                                buttonObjets.style.color = 'white';
+                                                buttonObjets.style.backgroundColor = '#1D6154';
+
+                                                buttonTous.style.color = '#1D6154';
+                                                buttonTous.style.backgroundColor = 'white';
+                                                buttonApp.style.color = '#1D6154';
+                                                buttonApp.style.backgroundColor = 'white';
+                                                buttonHot.style.color = '#1D6154';
+                                                buttonHot.style.backgroundColor = 'white';
+
+                                            } else {
+                                                imagesArray[i].style.display = 'none';
+                                            }
+                                        }
+
+                                    }
+
+                                    //montrer les images d'appartements quand on appuie sur Appartements
+                                    buttonApp.onclick = function () {
+                                        for (let i = 0; i < imagesArray.length; i++) {
+                                            if (catIdArray[i] === 2) {
+                                                imagesArray[i].style.display = 'block';
+
+                                                //CSS des boutons lors du clic
+                                                buttonApp.style.color = 'white';
+                                                buttonApp.style.backgroundColor = '#1D6154';
+
+                                                buttonObjets.style.color = '#1D6154';
+                                                buttonObjets.style.backgroundColor = 'white';
+                                                buttonTous.style.color = '#1D6154';
+                                                buttonTous.style.backgroundColor = 'white';
+                                                buttonHot.style.color = '#1D6154';
+                                                buttonHot.style.backgroundColor = 'white';
+
+                                            } else {
+                                                imagesArray[i].style.display = 'none';
+                                            }
+                                        }
+
+                                    }
+
+                                    //montrer les images d'hotel quand on appuie sur Hotel
+                                    buttonHot.onclick = function () {
+                                        for (let i = 0; i < imagesArray.length; i++) {
+                                            if (catIdArray[i] === 3) {
+                                                imagesArray[i].style.display = 'block';
+
+                                                //CSS des boutons lors du clic
+                                                buttonHot.style.color = 'white';
+                                                buttonHot.style.backgroundColor = '#1D6154';
+
+                                                buttonObjets.style.color = '#1D6154';
+                                                buttonObjets.style.backgroundColor = 'white';
+                                                buttonApp.style.color = '#1D6154';
+                                                buttonApp.style.backgroundColor = 'white';
+                                                buttonTous.style.color = '#1D6154';
+                                                buttonTous.style.backgroundColor = 'white';
+
+                                            } else {
+                                                imagesArray[i].style.display = 'none';
+                                            }
+                                        }
+
+                                    }
+
+                                    // CSS des categories
+                                    catContainer.style.display = 'flex';
+                                    catContainer.style.justifyContent = 'center';
+
+                                    buttonTous.style.display = 'block';
+                                    buttonTous.style.margin = '10px 10px 40px';
+                                    buttonTous.style.fontFamily = 'Syne';
                                     buttonTous.style.color = '#1D6154';
-                                    buttonTous.style.backgroundColor = 'white';
-                                    buttonApp.style.color = '#1D6154';
-                                    buttonApp.style.backgroundColor = 'white';
-                                    buttonHot.style.color = '#1D6154';
-                                    buttonHot.style.backgroundColor = 'white';
+                                    buttonTous.style.border = '1px solid #1D6154';
+                                    buttonTous.style.borderRadius = '20px';
+                                    buttonTous.style.padding = '10px 20px';
+                                    buttonTous.style.cursor = 'pointer';
 
-                                } else {
-                                    imagesArray[i].style.display = 'none';
-                                }
-                            }
-                            
-                        } 
 
-                        //montrer les images d'appartements quand on appuie sur Appartements
-                        buttonApp.onclick = function () {
-                            for (let i = 0; imagesArray.length; i++) {
-                                if (catIdArray[i] === 2) {
-                                    imagesArray[i].style.display = 'block';
-
-                                    //CSS des boutons lors du clic
-                                    buttonApp.style.color = 'white';
-                                    buttonApp.style.backgroundColor = '#1D6154';
-
+                                    buttonObjets.style.display = 'block';
+                                    buttonObjets.style.margin = '10px 10px 40px';
+                                    buttonObjets.style.fontFamily = 'Syne';
                                     buttonObjets.style.color = '#1D6154';
-                                    buttonObjets.style.backgroundColor = 'white';
-                                    buttonTous.style.color = '#1D6154';
-                                    buttonTous.style.backgroundColor = 'white';
-                                    buttonHot.style.color = '#1D6154';
-                                    buttonHot.style.backgroundColor = 'white';
+                                    buttonObjets.style.border = '1px solid #1D6154';
+                                    buttonObjets.style.borderRadius = '20px';
+                                    buttonObjets.style.padding = '10px 20px';
+                                    buttonObjets.style.cursor = 'pointer';
 
-                                } else {
-                                    imagesArray[i].style.display = 'none';
-                                }
-                            }
-                            
-                        } 
 
-                        //montrer les images d'hotel quand on appuie sur Hotel
-                        buttonHot.onclick = function () {
-                            for (let i = 0; imagesArray.length; i++) {
-                                if (catIdArray[i] === 3) {
-                                    imagesArray[i].style.display = 'block';
-
-                                    //CSS des boutons lors du clic
-                                    buttonHot.style.color = 'white';
-                                    buttonHot.style.backgroundColor = '#1D6154';
-
-                                    buttonObjets.style.color = '#1D6154';
-                                    buttonObjets.style.backgroundColor = 'white';
+                                    buttonApp.style.display = 'block';
+                                    buttonApp.style.margin = '10px 10px 40px';
+                                    buttonApp.style.fontFamily = 'Syne';
                                     buttonApp.style.color = '#1D6154';
-                                    buttonApp.style.backgroundColor = 'white';
-                                    buttonTous.style.color = '#1D6154';
-                                    buttonTous.style.backgroundColor = 'white';
-
-                                } else {
-                                    imagesArray[i].style.display = 'none';
-                                }
-                            }
-                            
-                        } 
-
-                        // CSS des categories
-                        catContainer.style.display = 'flex';
-                        catContainer.style.justifyContent = 'center';
-
-                        buttonTous.style.display = 'block';
-                        buttonTous.style.margin = '10px 10px 40px';
-                        buttonTous.style.fontFamily = 'Syne';
-                        buttonTous.style.color = '#1D6154'; 
-                        buttonTous.style.border = '1px solid #1D6154';
-                        buttonTous.style.borderRadius = '20px';
-                        buttonTous.style.padding = '10px 20px';
-                        buttonTous.style.cursor = 'pointer';
+                                    buttonApp.style.border = '1px solid #1D6154';
+                                    buttonApp.style.borderRadius = '20px';
+                                    buttonApp.style.padding = '10px 20px';
+                                    buttonApp.style.cursor = 'pointer';
 
 
-                        buttonObjets.style.display = 'block';
-                        buttonObjets.style.margin = '10px 10px 40px';
-                        buttonObjets.style.fontFamily = 'Syne';
-                        buttonObjets.style.color = '#1D6154'; 
-                        buttonObjets.style.border = '1px solid #1D6154';
-                        buttonObjets.style.borderRadius = '20px';
-                        buttonObjets.style.padding = '10px 20px';
-                        buttonObjets.style.cursor = 'pointer';
+                                    buttonHot.style.display = 'block';
+                                    buttonHot.style.margin = '10px 10px 40px';
+                                    buttonHot.style.fontFamily = 'Syne';
+                                    buttonHot.style.color = '#1D6154';
+                                    buttonHot.style.border = '1px solid #1D6154';
+                                    buttonHot.style.borderRadius = '20px';
+                                    buttonHot.style.padding = '10px 20px';
+                                    buttonHot.style.cursor = 'pointer';
+
+                                    // enlever le bouton login et mettre le bouton logout quand on est connectes
+                                    let loginButton = document.getElementById('loginButton');
+                                    let logoutButton = document.getElementById('logoutButton');
+                                    let ulCategories = document.getElementById('ulCategories');
+                                    let projetsDiv = document.getElementById('projetsDiv');
 
 
-                        buttonApp.style.display = 'block';
-                        buttonApp.style.margin = '10px 10px 40px';
-                        buttonApp.style.fontFamily = 'Syne';
-                        buttonApp.style.color = '#1D6154'; 
-                        buttonApp.style.border = '1px solid #1D6154';
-                        buttonApp.style.borderRadius = '20px';
-                        buttonApp.style.padding = '10px 20px';
-                        buttonApp.style.cursor = 'pointer';
+                                    if (sessionStorage.userId == 1 && sessionStorage.token) {
+                                        loginButton.style.display = 'none';
+                                        logoutButton.style.display = 'block';
+                                        ulCategories.style.display = 'none';
+                                        projetsDiv.style.margin = '0px 0px 50px';
+                                    } else {
+                                        loginButton.style.display = 'block';
+                                        logoutButton.style.display = 'none';
+                                        ulCategories.style.display = 'flex';
+                                        modifierButton.style.display = 'none';
 
 
-                        buttonHot.style.display = 'block';
-                        buttonHot.style.margin = '10px 10px 40px';
-                        buttonHot.style.fontFamily = 'Syne';
-                        buttonHot.style.color = '#1D6154'; 
-                        buttonHot.style.border = '1px solid #1D6154';
-                        buttonHot.style.borderRadius = '20px';
-                        buttonHot.style.padding = '10px 20px';
-                        buttonHot.style.cursor = 'pointer';
-                        
-                        // enlever le bouton login et mettre le bouton logout quand on est connectes
-                        let loginButton = document.getElementById('loginButton');
-                        let logoutButton = document.getElementById('logoutButton');
-                        let ulCategories = document.getElementById('ulCategories');
-                        let projetsDiv = document.getElementById('projetsDiv');
-                        
-
-                        if (sessionStorage.token == 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5NjUxMjI3NywiZXhwIjoxNjk2NTk4Njc3fQ.t30pQ39-PANtdVzy9ki9EFX_GgAA4EFFJyuTamk_oWI' && sessionStorage.userId == 1) {
-                            loginButton.style.display = 'none';
-                            logoutButton.style.display = 'block';
-                            ulCategories.style.display = 'none';
-                            projetsDiv.style.margin = '0px 0px 50px';
-                        } else {
-                            loginButton.style.display = 'block';
-                            logoutButton.style.display = 'none';
-                            ulCategories.style.display = 'flex';
-                            modifierButton.style.display = 'none';
-
-                            
-                        }
+                                    }
 
 
-                    })
+                                })
 
+                        })
                 })
-        })
 
-    }) 
+        })
+}
+
+fetchWorksElements();
 
 //action du bouton logout
 let logoutButton = document.getElementById('logoutButton');
@@ -274,7 +281,7 @@ let logoutButton = document.getElementById('logoutButton');
 logoutButton.addEventListener('click', function (event) {
     sessionStorage.clear();
     window.location.reload();
-    
+
 })
 
 //action du bouton modifier 
@@ -300,26 +307,33 @@ closeOut.addEventListener('click', function (event) {
 //fetch de la fenetre modale
 let modalWorks = document.getElementById('modalWorks');
 
-fetch ('http://localhost:5678/api/works')
-.then((datas) => {
-    datas.json()
-    .then((works) => {
 
-        for (let i = 0; i < works.length; i++) {
+function fetchModalWorks() {
+    fetch('http://localhost:5678/api/works')
+        .then((datas) => {
+            datas.json()
+                .then((works) => {
+                    //clear modalworks window
+                    modalWorks.innerHTML = '';
+                    //Fill modalWorks with clean data
+                    for (let i = 0; i < works.length; i++) {
 
-            let modalImages = document.createElement('img');
+                        let modalImages = document.createElement('img');
 
-            modalWorks.appendChild(modalImages);
+                        modalWorks.appendChild(modalImages);
 
-                let work = works[i];
-                let workValues = Object.values(work);
-                let workUrl = workValues[2];
-                modalImages.src = workUrl;
-        }
-        
+                        let work = works[i];
+                        let workValues = Object.values(work);
+                        let workUrl = workValues[2];
+                        modalImages.src = workUrl;
+                    }
 
-    })
-})
+
+                })
+        })
+}
+
+fetchModalWorks();
 
 //// fenetre d'ajout des projets ////
 
@@ -364,7 +378,7 @@ lienAjoutPhoto.addEventListener('click', function (event) {
 let imageProjet = document.getElementById('imageProjet');
 let imageProjetUrl = '';
 
-lienFile.onchange = function() {
+lienFile.onchange = function () {
     imageProjet.src = URL.createObjectURL(lienFile.files[0]);
     imageProjetUrl = imageProjet.src;
     logoAjoutPhoto.style.display = 'none';
@@ -390,14 +404,17 @@ let ajoutPhoto = document.getElementById('ajoutPhoto');
 
 function ajoutPhotoFun() {
 
-    modalPhoto.addEventListener('submit', function(event) {
+    modalPhoto.addEventListener('submit', function (event) {
 
         if (titreInput.value !== '' && categorieSelect.value !== '' && imageProjetUrl !== '') {
 
             event.preventDefault();
 
-            let token = localStorage.getItem("token");
-            
+            let token = sessionStorage.getItem("token");
+
+            // This is the bearer to pass to post request header !!
+            console.log(token);
+
             if (!token) {
                 alert("Token manquant. Veuillez vous reconnecter.");
                 return;
@@ -405,7 +422,7 @@ function ajoutPhotoFun() {
 
             const formData = new FormData();
 
-            formData.append('image', lienFile.files[0]); 
+            formData.append('image', lienFile.files[0]);
             formData.append('title', titreInput.value);
             formData.append('category', categorieSelect.value);
 
@@ -416,23 +433,31 @@ function ajoutPhotoFun() {
                 },
                 body: formData,
             })
-            .then(res => {
-                if (!res.ok) {
-                    return res.json().then(err => { throw err; });
-                }
-                return res.json();
-            })
-            .then(createWork => {
-                console.log(createWork);
-                localStorage.setItem("title", createWork.title);
-                localStorage.setItem("categoryId", createWork.categoryId);
-                localStorage.setItem("imageUrl", createWork.imageUrl);
-            })
-            .catch(problem => {
-                console.error("Il y a eu un problème avec l'opération fetch:", problem);
-            });
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(err => { throw err; });
+                    }
+                    return res.json();
+                })
+                .then(createWork => {
+                    console.log(createWork);
+                    localStorage.setItem("title", createWork.title);
+                    localStorage.setItem("categoryId", createWork.categoryId);
+                    localStorage.setItem("imageUrl", createWork.imageUrl);
+                })
+                .catch(problem => {
+                    console.error("Il y a eu un problème avec l'opération fetch:", problem);
+                });
         } else {
             alert("Champs obligatoires");
         }
+
+        modalPhoto.style.display = 'none';
+        boiteModal.style.display = 'none';
     });
 }
+
+
+
+
+
