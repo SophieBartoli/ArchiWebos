@@ -322,6 +322,7 @@ footer nav ul {
 	border-radius: 5px;
 	text-align: center;
 	z-index: 3;
+	justify-content: center;
 }
 
 #closeDiv {
@@ -345,13 +346,15 @@ footer nav ul {
 #modalWorks {
 	display: flex;
 	flex-wrap: wrap;
-	height: auto;
-	width: 61.5%;
+	height: 300px;
+	width: 300px;
+	overflow-y: scroll;
+	border: 2px solid green;
 }
 
 #modalWorks img {
 	height: auto;
-	width: 60px;
+	width: 70px;
 	margin: 10px 3px 6px 3px;
 }
 
@@ -374,6 +377,7 @@ footer nav ul {
 #modalWorksDiv {
 	display: flex;
 	justify-content: center;
+	border: 2px solid red;
 	
 }
 
@@ -534,4 +538,18 @@ footer nav ul {
 #worksAjoutPhotoDiv {
 	display: flex;
 	justify-content: center;
+}
+
+
+/***** delete images ****/
+
+#modalFigure {
+	border : 2px solid blue;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+#imageDeleteButton {
+	border : 2px solid orange;
+	position: relative;
 }

@@ -319,13 +319,21 @@ function fetchModalWorks() {
                     for (let i = 0; i < works.length; i++) {
 
                         let modalImages = document.createElement('img');
+                        let modalFigure = document.createElement('figure');
+                        let imageDeleteButton = document.createElement('button');
 
-                        modalWorks.appendChild(modalImages);
+                        modalWorks.appendChild(modalFigure);
+                        modalFigure.appendChild(modalImages);
+                        modalFigure.appendChild(imageDeleteButton);
 
                         let work = works[i];
                         let workValues = Object.values(work);
                         let workUrl = workValues[2];
                         modalImages.src = workUrl;
+
+                        modalFigure.setAttribute('id', 'modalFigure');
+                        imageDeleteButton.setAttribute('id', 'imageDeleteButton')
+                        
                     }
 
 
