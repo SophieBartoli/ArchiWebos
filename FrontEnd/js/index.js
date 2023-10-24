@@ -313,18 +313,28 @@ function fetchModalWorks() {
         .then((datas) => {
             datas.json()
                 .then((works) => {
-                    //clear modalworks window
+
+                    //Vider la fenêtre modale
                     modalWorks.innerHTML = '';
-                    //Fill modalWorks with clean data
+
+                    //Remplir la fenêtre modale avec du nouveau code
                     for (let i = 0; i < works.length; i++) {
 
                         let modalImages = document.createElement('img');
                         let modalFigure = document.createElement('figure');
                         let imageDeleteButton = document.createElement('button');
+                        let imageDeleteButtonIcon = document.createElement('i');
+                        let deleteButtonArray = [];
+
+                        imageDeleteButtonIcon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
 
                         modalWorks.appendChild(modalFigure);
                         modalFigure.appendChild(modalImages);
                         modalFigure.appendChild(imageDeleteButton);
+                        imageDeleteButton.appendChild(imageDeleteButtonIcon);
+
+                        deleteButtonArray.push(imageDeleteButton);
+                        console.log(deleteButtonArray);
 
                         let work = works[i];
                         let workValues = Object.values(work);
@@ -332,7 +342,18 @@ function fetchModalWorks() {
                         modalImages.src = workUrl;
 
                         modalFigure.setAttribute('id', 'modalFigure');
-                        imageDeleteButton.setAttribute('id', 'imageDeleteButton')
+                        imageDeleteButton.setAttribute('id', 'imageDeleteButton');
+
+                        imageDeleteButton.addEventListener('click', function (event) {
+
+                            event.preventDefault();
+
+
+
+
+
+
+                        })
                         
                     }
 
@@ -420,7 +441,6 @@ function ajoutPhotoFun() {
 
             let token = sessionStorage.getItem("token");
 
-            // This is the bearer to pass to post request header !!
             console.log(token);
 
             if (!token) {
