@@ -369,7 +369,7 @@ function fetchModalWorks() {
         })
 }
 
-console.log(deleteButtonArray);
+
 
 fetchModalWorks();
 
