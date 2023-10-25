@@ -307,7 +307,6 @@ closeOut.addEventListener('click', function (event) {
 //fetch de la fenetre modale
 let modalWorks = document.getElementById('modalWorks');
 
-
 function fetchModalWorks() {
     fetch('http://localhost:5678/api/works')
         .then((datas) => {
@@ -324,7 +323,6 @@ function fetchModalWorks() {
                         let modalFigure = document.createElement('figure');
                         let imageDeleteButton = document.createElement('button');
                         let imageDeleteButtonIcon = document.createElement('i');
-                        let deleteButtonArray = [];
 
                         imageDeleteButtonIcon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
 
@@ -333,34 +331,45 @@ function fetchModalWorks() {
                         modalFigure.appendChild(imageDeleteButton);
                         imageDeleteButton.appendChild(imageDeleteButtonIcon);
 
-                        deleteButtonArray.push(imageDeleteButton);
-                        console.log(deleteButtonArray);
-
                         let work = works[i];
                         let workValues = Object.values(work);
                         let workUrl = workValues[2];
+                        let workId = workValues[0];
                         modalImages.src = workUrl;
 
                         modalFigure.setAttribute('id', 'modalFigure');
                         imageDeleteButton.setAttribute('id', 'imageDeleteButton');
 
+                        // Action du bouton delete de chaque image 
+
                         imageDeleteButton.addEventListener('click', function (event) {
 
                             event.preventDefault();
 
+                            let token = sessionStorage.getItem("token");
 
+                            fetch (`http://localhost:5678/api/works/${workId}`, {
+                                method: "DELETE",
+                                headers: {
+                                    "Authorization": 'Bearer ' + token
+                                },
+                            })
 
+                            const reloadPage = () => {
+                                window.location.reload()
+                            }
 
-
+                            setTimeout(reloadPage, 500);
 
                         })
-                        
+                  
                     }
-
 
                 })
         })
 }
+
+console.log(deleteButtonArray);
 
 fetchModalWorks();
 
