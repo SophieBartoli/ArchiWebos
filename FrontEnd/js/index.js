@@ -337,8 +337,8 @@ function fetchModalWorks() {
                         let workId = workValues[0];
                         modalImages.src = workUrl;
 
-                        modalFigure.setAttribute('id', 'modalFigure');
-                        imageDeleteButton.setAttribute('id', 'imageDeleteButton');
+                        modalFigure.setAttribute('class', 'modalFigure');
+                        imageDeleteButton.setAttribute('class', 'imageDeleteButton');
 
                         // Action du bouton delete de chaque image 
 
@@ -366,7 +366,7 @@ function fetchModalWorks() {
                     }
 
                 })
-        })
+    })
 }
 
 
@@ -485,16 +485,144 @@ function ajoutPhotoFun() {
                 .catch(problem => {
                     console.error("Il y a eu un problème avec l'opération fetch:", problem);
                 });
+
+                boiteModal.style.display = 'none';
         } else {
             alert("Champs obligatoires");
         }
 
-        modalPhoto.style.display = 'none';
-        boiteModal.style.display = 'none';
-    });
+        //Nouveau Fetch pour rendre l'ajout des photos dynamique
+
+        function fetchNewWorks() {
+
+           imgGallery = document.getElementById('imgGallery');
+           imgGallery.innerHTML = '';
+
+            fetch('http://localhost:5678/api/works')
+                .then((datas) => {
+                    datas.json()
+                        .then((elements) => {
+                            
+                            imagesArray = [];
+                            catArray = [];
+                            catIdArray = [];
+        
+                          
+                            for (let i = 0; i < elements.length; i++) {
+                                
+                            }
+        
+                            
+                            for (let i = 0; i < elements.length; i++) {
+        
+                               
+                                let figureElement = document.createElement('figure');
+                                let imageElement = document.createElement('img');
+        
+                                imagesArray.push(figureElement);
+
+                                
+                                const container = document.getElementById('imgGallery');
+        
+                               
+                                container.appendChild(figureElement);
+                                figureElement.appendChild(imageElement);
+        
+        
+                               
+                                let element = elements[i];
+                                let values = Object.values(element);
+                                let imgUrl = values[2];
+                                imageElement.src = imgUrl;
+        
+                                
+                                let imgText = values[1];
+                                let imageCaption = document.createElement('figcaption');
+                                figureElement.appendChild(imageCaption);
+                                imageCaption.innerHTML = values[1];
+        
+                                
+                                let categoryId = values[3];
+        
+                                catIdArray.push(categoryId);
+        
+        
+                            }
+                        })
+                })
+        }
+
+        setTimeout(fetchNewWorks, 500);
+
+    
+        
+        function fetchNewWorkModal() {
+
+            modalWorks.innerHTML = '';
+        
+            fetch('http://localhost:5678/api/works')
+                .then((datas) => {
+                    datas.json()
+                        .then((works) => {
+        
+                            //Remplir la fenêtre modale avec du nouveau code
+                            for (let i = 0; i < works.length; i++) {
+        
+                                let modalImages = document.createElement('img');
+                                let modalFigure = document.createElement('figure');
+                                let imageDeleteButton = document.createElement('button');
+                                let imageDeleteButtonIcon = document.createElement('i');
+        
+                                imageDeleteButtonIcon.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+        
+                                modalWorks.appendChild(modalFigure);
+                                modalFigure.appendChild(modalImages);
+                                modalFigure.appendChild(imageDeleteButton);
+                                imageDeleteButton.appendChild(imageDeleteButtonIcon);
+        
+                                let work = works[i];
+                                let workValues = Object.values(work);
+                                let workUrl = workValues[2];
+                                let workId = workValues[0];
+                                modalImages.src = workUrl;
+
+                                modalFigure.setAttribute('class', 'modalFigure');
+                                imageDeleteButton.setAttribute('class', 'imageDeleteButton');
+
+                                imageDeleteButton.addEventListener('click', function (event) {
+
+                                    event.preventDefault();
+        
+                                    let token = sessionStorage.getItem("token");
+        
+                                    fetch (`http://localhost:5678/api/works/${workId}`, {
+                                        method: "DELETE",
+                                        headers: {
+                                            "Authorization": 'Bearer ' + token
+                                        },
+                                    })
+        
+                                    const reloadPage = () => {
+                                        window.location.reload()
+                                    }
+        
+                                    setTimeout(reloadPage, 500);
+        
+                                })
+                            }
+                        })
+                })
+        }
+
+        fetchNewWorkModal();
+    })
+    
 }
 
 
 
+
+
+// FIN DU PROJET
 
 

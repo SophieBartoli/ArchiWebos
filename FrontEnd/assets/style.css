@@ -533,7 +533,7 @@ footer nav ul {
 
 /***** delete images ****/
 
-#modalFigure {
+.modalFigure {
 	margin: 0px 0px 0px 0px;
 	padding: 0px 0px 0px 0px;
 	display: flex;
@@ -542,13 +542,13 @@ footer nav ul {
 	z-index: 6;
 }
 
-#modalFigure img {
+.modalFigure img {
 	height: 85px;
 	width: 65px;
 	margin: 10px 3px 6px 3px;
 }
 
-#imageDeleteButton {
+.imageDeleteButton {
 	display: flex;
 	position: absolute;
 	z-index: 7;

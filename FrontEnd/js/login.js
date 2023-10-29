@@ -42,13 +42,20 @@ function ajoutListenerLogin() {
                     window.location.assign(nextLocation);
                     sessionStorage.setItem("token", localStorage.token);
                     sessionStorage.setItem("userId", localStorage.userId);
+                    errorMessage.style.display = 'none';
                 } else {
-                    errorMessage.style.display = 'block';
                 }
+
             })
             .catch(error => {
                 console.error("Il y a eu un problème avec l'opération fetch:", error);
             });
+
+            function errorMessageDisplay() {
+                errorMessage.style.display = 'block';
+            }
+
+            setTimeout(errorMessageDisplay, 500);
 
     });
 }
