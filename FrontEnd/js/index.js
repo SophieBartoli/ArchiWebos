@@ -397,9 +397,6 @@ modalWorksReturn.addEventListener('click', function (event) {
     logoAjoutPhoto.style.display = 'block';
     maxMoAjoutPhoto.style.display = 'block';
     lienAjoutPhoto.style.display = 'block';
-    logoAjoutPhoto.style.display = 'none';
-    maxMoAjoutPhoto.style.display = 'none';
-    lienAjoutPhoto.style.display = 'none';
 })
 
 //lier le bouton cree au bouton input file cache
@@ -487,6 +484,7 @@ function ajoutPhotoFun() {
                 });
 
                 boiteModal.style.display = 'none';
+
         } else {
             alert("Champs obligatoires");
         }
@@ -553,7 +551,6 @@ function ajoutPhotoFun() {
         }
 
         setTimeout(fetchNewWorks, 500);
-
     
         
         function fetchNewWorkModal() {
@@ -586,6 +583,9 @@ function ajoutPhotoFun() {
                                 let workId = workValues[0];
                                 modalImages.src = workUrl;
 
+
+                                //Fetch pour DELETE une image
+
                                 modalFigure.setAttribute('class', 'modalFigure');
                                 imageDeleteButton.setAttribute('class', 'imageDeleteButton');
 
@@ -610,6 +610,13 @@ function ajoutPhotoFun() {
         
                                 })
                             }
+
+                            modifierButton.addEventListener('click', function (event) {
+                                modalPhoto.style.display = 'none';
+                                boiteModal.style.display = 'flex';
+                                modal.style.display = 'flex';
+                            })
+                    
                         })
                 })
         }
