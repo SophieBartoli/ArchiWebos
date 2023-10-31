@@ -490,11 +490,9 @@ function ajoutPhotoFun() {
         }
 
         //Nouveau Fetch pour rendre l'ajout des photos dynamique
-
         function fetchNewWorks() {
 
            imgGallery = document.getElementById('imgGallery');
-           imgGallery.innerHTML = '';
 
             fetch('http://localhost:5678/api/works')
                 .then((datas) => {
@@ -504,12 +502,8 @@ function ajoutPhotoFun() {
                             imagesArray = [];
                             catArray = [];
                             catIdArray = [];
-        
-                          
-                            for (let i = 0; i < elements.length; i++) {
-                                
-                            }
-        
+
+                            imgGallery.innerHTML = '';
                             
                             for (let i = 0; i < elements.length; i++) {
         
@@ -552,15 +546,15 @@ function ajoutPhotoFun() {
 
         setTimeout(fetchNewWorks, 500);
     
-        
+        // Fetch des nouveaux projets dans la fenêtre modale
         function fetchNewWorkModal() {
-
-            modalWorks.innerHTML = '';
         
             fetch('http://localhost:5678/api/works')
                 .then((datas) => {
                     datas.json()
                         .then((works) => {
+
+                            modalWorks.innerHTML = '';
         
                             //Remplir la fenêtre modale avec du nouveau code
                             for (let i = 0; i < works.length; i++) {
@@ -621,7 +615,7 @@ function ajoutPhotoFun() {
                 })
         }
 
-        fetchNewWorkModal();
+        setTimeout(fetchNewWorkModal, 500);
     })
     
 }

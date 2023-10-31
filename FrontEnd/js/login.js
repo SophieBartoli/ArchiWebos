@@ -34,29 +34,17 @@ function ajoutListenerLogin() {
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("userId", data.userId);
             })
-            .then(() => {
-                //redirection sur page d'accueil apres connection et enregistrement des identifiants en session
-                if (login.email == "sophie.bluel@test.tld" && login.password == "S0phie") {
-                    let currentLocation = location.toString();
-                    let nextLocation = currentLocation.substring(0, currentLocation.lastIndexOf('/') + 1) + "index.html";
-                    window.location.assign(nextLocation);
-                    sessionStorage.setItem("token", localStorage.token);
-                    sessionStorage.setItem("userId", localStorage.userId);
-                    errorMessage.style.display = 'none';
-                } else {
-                }
-
-            })
-            .catch(error => {
-                console.error("Il y a eu un problème avec l'opération fetch:", error);
-            });
-
-            function errorMessageDisplay() {
+            
+            //redirection sur page d'accueil apres connection et enregistrement des identifiants en session
+            if (login.email == "sophie.bluel@test.tld" && login.password == "S0phie") {
+                let currentLocation = location.toString();
+                let nextLocation = currentLocation.substring(0, currentLocation.lastIndexOf('/') + 1) + "index.html";
+                window.location.assign(nextLocation);
+                sessionStorage.setItem("token", localStorage.token);
+                sessionStorage.setItem("userId", localStorage.userId);
+            } else {
                 errorMessage.style.display = 'block';
             }
-
-            setTimeout(errorMessageDisplay, 500);
-
     });
 }
 
