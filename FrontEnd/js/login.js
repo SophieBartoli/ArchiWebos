@@ -1,11 +1,8 @@
-
-// fonction pour se connecter 
-function ajoutListenerLogin() {
-
     const form = document.getElementById("form");
     const errorMessage = document.getElementById("errorMessage");
+    let connectButton = document.getElementById("connectButton");
 
-    form.addEventListener("submit", function (event) {
+    connectButton.addEventListener("click", function (event) {
 
         event.preventDefault();
 
@@ -50,6 +47,6 @@ function ajoutListenerLogin() {
                 errorMessage.style.display = 'block';
             })
     });
-}
+
 
 
